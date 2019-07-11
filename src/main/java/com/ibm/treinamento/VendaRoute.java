@@ -30,18 +30,19 @@ public class VendaRoute  extends RouteBuilder{
 	}
 	@Override
 	public void configure() throws Exception {
-		from(DIRECT_VENDA_ROUTE)
-			.routeId(ID_VENDA_ROUTE)
+		from(DIRECT_VENDA_ROUTE_ORQUESTRACAO)
+			.routeId(ID_VENDA_ROUTE_ORQUESTRACOA)
 			.doTry()
-				//.to()
+				.process(consultaVendaEntradaProcessor)
+				.to(VENDA_ROUTE_API)
+				.process(consultaVendaSaidaProcessor)
 			.endDoTry()
 			.doCatch(CustumizacaoException.class)
 				.process(badRequestProcessor)
 			.doCatch(Exception.class)
 				.process(serverInterneErro)
 			.doFinally()
-		.setHeader(Exchange.HTTP_RESPONSE_CODE, simple("${in.header.CamelHttpResponseCode}"));
-		
+		.end();
 		
 		
 	}

@@ -1,6 +1,6 @@
 package com.ibm.treinamento;
 
-import static com.ibm.treinamento.VendaRoute.DIRECT_VENDA_ROUTE;
+import static com.ibm.treinamento.VendaRoute.DIRECT_VENDA_ROUTE_ORQUESTRACAO;
 
 import org.apache.camel.builder.RouteBuilder;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,7 @@ public class VendaController extends RouteBuilder {
 			 .id("venda-rest")
         	 .get("venda")
         	 	.description("buscar a venda")
-        	 		.to(DIRECT_VENDA_ROUTE);
+        	 		.to(DIRECT_VENDA_ROUTE_ORQUESTRACAO);
 		
 	}
 
