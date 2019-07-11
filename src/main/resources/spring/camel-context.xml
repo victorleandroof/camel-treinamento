@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:camel="http://camel.apache.org/schema/spring"
+       xmlns:cxf="http://camel.apache.org/schema/cxf"
+       xsi:schemaLocation="
+         http://www.springframework.org/schema/beans 
+         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+         http://camel.apache.org/schema/spring 
+         http://camel.apache.org/schema/spring/camel-spring.xsd">
+         <bean 
+         	class="org.apache.camel.processor.interceptor.DefaultTraceFormatter"
+         	 id="traceFormatter">
+         	<property name="showBody" value="false"/>
+         	<property name="showBodyType" value="false"/>
+         	<property name="showBreadCrumb" value="true"/>
+         	<property name="maxChars" value="1000"/>
+         </bean>
+  			<camelContext 
+  				trace="false" useMDCLogging="true" xmlns="http://camel.apache.org/schema/spring">
+  				<routeContextRef ref="common-routes"/>
+  			</camelContext>
+</beans>
